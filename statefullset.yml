@@ -19,7 +19,7 @@ spec:
         image: mariadb:latest
         env:
         - name: MYSQL_ROOT_PASSWORD
-          value: ""  # Root không có mật khẩu
+          value: ""  
         ports:
         - containerPort: 3306
         volumeMounts:
