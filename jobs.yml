@@ -1,13 +1,14 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: my-job
+  name: app-job
+  namespace: app-service
 spec:
   template:
     spec:
       containers:
-      - name: my-container
+      - name: app-job-container
         image: busybox
-        command: ["echo", "Hello World"]
+        command: ["echo", "Hello, Kubernetes!"]
       restartPolicy: Never
   backoffLimit: 4

@@ -1,10 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: my-service
+  name: app-deploy-service
+  namespace: app-service
 spec:
   selector:
-    app: my-app
+    app: app-deploy
   ports:
     - protocol: TCP
       port: 80

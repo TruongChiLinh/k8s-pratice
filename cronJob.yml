@@ -1,15 +1,16 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: my-cronjob
+  name: app-cronjob
+  namespace: app-service
 spec:
-  schedule: "*/1 * * * *"
+  schedule: "*/1 * * * *"  
   jobTemplate:
     spec:
       template:
         spec:
           containers:
-          - name: my-container
+          - name: app-cronjob-container
             image: busybox
-            command: ["echo", "Hello World"]
-          restartPolicy: Never
+            command: ["echo", "This is a cron job running every minute"]
+          restartPolicy: OnFailure

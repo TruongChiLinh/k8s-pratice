@@ -1,19 +1,20 @@
 apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
-  name: my-replicaset
+  name: app-rplc
+  namespace: app-service
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: my-app
+      app: app-rplc
   template:
     metadata:
       labels:
-        app: my-app
+        app: app-rplc
     spec:
       containers:
-      - name: my-container
+      - name: app-container
         image: nginx:latest
         ports:
         - containerPort: 80

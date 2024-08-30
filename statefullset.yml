@@ -2,12 +2,13 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: mariadb
+  namespace: app-service
 spec:
-  serviceName: "mariadb"
-  replicas: 3
   selector:
     matchLabels:
       app: mariadb
+  serviceName: "mariadb-service"
+  replicas: 1
   template:
     metadata:
       labels:
@@ -16,19 +17,19 @@ spec:
       containers:
       - name: mariadb
         image: mariadb:latest
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: ""  # Root không có mật khẩu
         ports:
         - containerPort: 3306
-        # env:
-        # - name: tk root
-        #   value: "pass" 
         volumeMounts:
-        - name: mariadb-storage
+        - name: mariadb-persistent-storage
           mountPath: /var/lib/mysql
   volumeClaimTemplates:
   - metadata:
-      name: mariadb-storage
+      name: mariadb-persistent-storage
     spec:
-      accessModes: ["ReadWriteOnce"]
+      accessModes: [ "ReadWriteOnce" ]
       resources:
         requests:
           storage: 1Gi
